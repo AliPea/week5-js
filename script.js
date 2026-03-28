@@ -1,18 +1,16 @@
+// // call stack
+// console.log("Start"); 
 
+// // browser
+// setTimeout(() => {
+//     console.log("setTimeout")
+// }, 0);
+// // handler callback
 
-// call stack
-console.log("Start"); 
+// // call stack
+// console.log("End");
 
-// browser
-setTimeout(() => {
-    console.log("setTimeout")
-}, 0);
-// handler callback
-
-// call stack
-console.log("End");
-
-// callback to callstack
+// // callback queu to callstack
 
 // setTimeout(() => {
 //     console.log("Hello World")
@@ -23,7 +21,6 @@ console.log("End");
 // }, 2000);
 
 // setTimeout(() => clearInterval(id), 5000);
-
 
 
 // function fetchUser(id, callback) {
@@ -39,7 +36,7 @@ console.log("End");
 // })
 
 
-// callback hell - why promises are useful
+// // callback hell - why promises are useful
 // getUser(id, (user) => {
 //     getProfile(user.id, (profile) => {
 //         getPosts(profile.posts, (commments) => {
@@ -50,9 +47,9 @@ console.log("End");
 //     })
 // })
 
-// promises
+// // promises
 
-// old way promises
+// // old way promises
 // function fetchUserPromise(id) {
 //     // mimmick latency task
 //     setTimeout(() => {
@@ -67,11 +64,11 @@ console.log("End");
 // }
 
 // // consume the promiise
-// // fetchUserPromise(123)
-// //         .then((u) => getProfile(u.id))
-// //         .then((p) => getPosts(p.posts))
-// //         .then((c) => console.log(c[0]) )
-// //         .catch((e)=> console.error(e.message))
+// fetchUserPromise(123)
+//         .then((u) => getProfile(u.id))
+//         .then((p) => getPosts(p.posts))
+//         .then((c) => console.log(c[0]) )
+//         .catch((e)=> console.error(e.message))
 
 // // new way promises - async and await
 // // ES 6 syntax vanilla
@@ -90,27 +87,27 @@ console.log("End");
 // async function grabName() {
 //     const user1 = await fetchUser(123);
 //     const user2 = await fetchUser(124);
-// }
-// // 2 seconds
+// } // 2 seconds
 
 // async function grabGroupedNames(){
 //     const [user1, user2] = await Promise.all([
 //         fetchUser(123),
 //         fetchUser(456)
 //     ])
-// }
-// in one return in 1 second 
+// } // in one return in 1 second 
 
+
+// GET request
 async function getUser() {
     try {
         const response = await fetch("https://jsonplaceholder.typicode.com/users/1");
 
         if (!response.ok) {
             throw new Error("User not found");    
-        } else {
-
-            console.log(response);
         }
+        const user = await response.json();
+        console.log(user);
+        return user;
     } catch (error) {
         console.log(error);
     }
@@ -118,27 +115,28 @@ async function getUser() {
 
 getUser();
 
-async function postComment(userComment) {
-    const response = await fetch(URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userComment)
-    })
+// POST request
+// async function postComment(userComment) {
+//     const response = await fetch(URL, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(userComment)
+//     })
 
-    return response.json();
-}
-const userComment = prompt();
-postComment({id: id, name: "Corey", comment: userComment})
+//     return response.json();
+// }
+// const userComment = prompt();
+// postComment({id: id, name: "Corey", comment: userComment})
 
-// API keys
-// create config file
-// add api keys in env vars
-// add config to gitigone
+// // API keys
+// // create config file
+// // add api keys in env vars
+// // add config to gitigone
 
-const apikey = "12345667"
-export const envAPIKey = process.env.apikey;
+// const apikey = "12345667"
+// export const envAPIKey = process.env.apikey;
 
 
 
