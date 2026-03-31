@@ -51,16 +51,15 @@ getUser(id, (user) => {
 
 // old way promises
 function fetchUserPromise(id) {
-    // async task
-    setTimeout(() => {
-        if(id) {
-             // handle resolve
-            resolve({id: id, name: "Corey"});
-        } else {
-            // handle reject
-            reject("no valid id was found");
-        }
-    }, 2000)
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if(id) {
+                resolve({id: id, name: "Corey"});
+            } else {
+                reject("no valid id was found");
+            }
+        }, 2000)
+    })
 }
 
 // consume the promiise
@@ -118,16 +117,20 @@ getUser();
 
 // POST request
 async function postComment(userComment) {
-    const response = await fetch(URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userComment)
-    })
-
-    return response.json();
+    try {
+        const response = await fetch(URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userComment)
+        })
+        return await response.json();
+    } catch (error) {
+        console.error(`error posting ${error}`)
+    }
 }
+
 const userComment = prompt();
 postComment({id: id, name: "Corey", comment: userComment})
 
